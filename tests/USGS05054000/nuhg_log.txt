@@ -1,3 +1,11 @@
-[2025-03-30 11:25:32] Started data download for site 05054000
-[2025-03-30 11:25:34] Saved discharge CSV for site 05054000
-[2025-03-30 11:25:34] Saved site info CSV for site 05054000
+[2025-03-30 15:25:09] Raw NWIS columns: ['USGS:05054000:00010:00000', 'USGS:05054000:00010:00000_qualifiers', 'USGS:05054000:00060:00000', 'USGS:05054000:00060:00000_qualifiers', 'USGS:05054000:00065:00000', 'USGS:05054000:00065:00000_qualifiers', 'USGS:05054000:00095:00000', 'USGS:05054000:00095:00000_qualifiers', 'USGS:05054000:00300:00000', 'USGS:05054000:00300:00000_qualifiers', 'USGS:05054000:00400:00000', 'USGS:05054000:00400:00000_qualifiers', 'USGS:05054000:63160:00000', 'USGS:05054000:63160:00000_qualifiers', 'USGS:05054000:63680:00000', 'USGS:05054000:63680:00000_qualifiers', 'USGS:05054000:99409:00000', 'USGS:05054000:99409:00000_qualifiers']
+[2025-03-30 15:25:09] Using discharge column: USGS:05054000:00060:00000
+[2025-03-30 15:25:09] Started data download for site 05054000
+[2025-03-30 15:25:11] Saved discharge CSV for site 05054000
+[2025-03-30 15:25:11] Saved site info CSV for site 05054000
+[2025-03-30 15:25:42] Starting peak detection for site 05054000 with prominence value 2182.234946011403
+[2025-03-30 15:25:42] Discharge stats — min: 75.7, max: 19700.0, mean: 1811.9497584759297
+[2025-03-30 15:25:42] Initial peak detection found 75 peaks for site 05054000
+[2025-03-30 15:25:42] Saved final filtered peaks CSV to C:\OneDrive\OneDrive - AECOM\Automation Projects\NUH\tests\USGS05054000\Peaks_05054000_All_Years.csv
+[2025-03-30 15:25:46] Filtered 56 similar/nearby peaks using min time gap of 12 hours and 1% discharge threshold
+[2025-03-30 15:25:46] Saved final filtered peaks CSV to C:\OneDrive\OneDrive - AECOM\Automation Projects\NUH\tests\USGS05054000\Peaks_05054000_All_Years.csv

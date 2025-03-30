@@ -66,7 +66,7 @@ def process_peaks(peaks_df, discharge_data):
 
 # Streamlit app main function
 def main():
-    st.title("Download Streamflow from USGS")
+    st.title("Normalized Unit Hydrograph Generator")
     st.write("""
         Developed by Mohsen Tahmasebi, PhD – https://www.hydromohsen.com/
     """)
@@ -75,33 +75,81 @@ def main():
         A normalized hydrograph is not a standard unit hydrograph, as it lacks rainfall excess information...
     """)
 
-    site_no = st.text_input("Site Number", "05125039")
+    site_no = st.text_input("USGS Site Number", "05125039")
     begin_date = st.date_input("Begin Date", value=pd.to_datetime("2010-01-01"))
     end_date = st.date_input("End Date", value=pd.to_datetime("2023-01-01"))
     output_folder = st.text_input("Output Folder")
 
-    month_options = ["January", "February", "March", "April", "May", "June",
-                     "July", "August", "September", "October", "November", "December"]
-    selected_months = st.multiselect("Select Months for Peak Detection", month_options, default=["September", "October"])
+    month_options = ["All"] + list(range(1, 13))
+    selected_months = st.multiselect(
+        "Select Months for Peak Detection",
+        options=month_options,
+        default="All"
+    )
+
+    # Convert "All" to full list of months
+    if "All" in selected_months:
+        months = list(range(1, 13))
+    else:
+        months = selected_months
 
     if st.button("Download Data"):
         if site_no and begin_date and end_date and output_folder and selected_months:
-            months = [month_options.index(month) + 1 for month in selected_months]
             st.session_state.discharge_filtered, st.session_state.USGS_data = GetFlow(site_no, begin_date, end_date, output_folder, months)
             st.session_state.data_loaded = True
 
     if st.session_state.get('data_loaded', False):
         std_dev_suggestion = st.session_state.discharge_filtered['discharge_cfs'].std()
-        prominence_value = st.number_input("Enter Prominence Value", value=std_dev_suggestion)
-        if st.button("Detect and Save Peaks"):
-            DetectAndSavePeaks(st.session_state.discharge_filtered, prominence_value, st.session_state.USGS_data, site_no)
-            st.success("Peaks detected and saved successfully.")
 
-        peaks_file_path = os.path.join(output_folder, f"USGS{site_no}", f"Peaks_{site_no}_All_Years.csv")
-        if os.path.exists(peaks_file_path):
-            peaks_df = pd.read_csv(peaks_file_path)
-            st.write("Peaks Data:")
-            st.dataframe(peaks_df)
+        prominence_value = st.number_input("Enter Prominence Value", value=std_dev_suggestion)
+
+        st.caption("""
+        **ℹ️ What is prominence?**  
+        Prominence controls how much a peak must stand out from surrounding data.  
+        - **Lower values** will detect more small peaks (including noise)  
+        - **Higher values** will detect only the most significant peaks
+
+        A good starting point is the standard deviation of the discharge, as suggested.
+        """)
+
+        min_peak_gap = st.number_input("Minimum time between peaks (hours)", min_value=1, value=12)
+
+        st.caption("""
+        **ℹ️ What is minimum time between peaks?**  
+        If multiple peaks occur within this number of hours and have nearly the same discharge, only one will be kept.  
+        This helps avoid saving flat-topped hydrographs as separate storms.
+        """)
+
+
+        peaks_df = None  # Step 1: Initialize first
+
+        if st.button("Detect and Save Peaks"):
+            if st.session_state.get('data_loaded', False):
+                try:
+                    # Step 2: Run peak detection
+                    peaks_df = DetectAndSavePeaks(
+                        st.session_state.discharge_filtered,
+                        prominence_value,
+                        st.session_state.USGS_data,
+                        site_no,
+                        min_peak_gap
+                    )
+                except Exception as e:
+                    st.error(f"An error occurred during peak detection: {e}")
+                    log_progress(st.session_state.USGS_data, f"Error during peak detection: {e}")
+
+            # Step 3: Check only if peaks_df is defined
+            if peaks_df is not None and not peaks_df.empty:
+                st.success("Peaks detected and saved successfully.")
+                
+            else:
+                st.warning("No peaks were detected for the selected site and parameters. Try lowering the prominence value.")
+
+            
+            if peaks_df is not None:
+                st.write("Peaks Data:")
+                st.dataframe(peaks_df)
+
             indices_to_keep = st.text_input("Enter the indices to keep (comma-separated, e.g., 500,705,2706):", key="indices_to_keep")
             if st.button("Update Peaks Data"):
                 update_peaks_data(peaks_file_path, indices_to_keep)

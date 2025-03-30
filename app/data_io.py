@@ -18,16 +18,43 @@ def GetFlow(site_no, begin_date, end_date, output_folder, user_months):
 
     try:
         discharge = hf.NWIS(site_no, 'iv', begin_date, end_date)
+        log_progress(USGS_data, f"Raw NWIS columns: {discharge.df().columns.tolist()}")
+
     except HydroNoDataError:
         msg = f"No data available for site {site_no} between {begin_date} and {end_date}."
         st.error(msg)
         log_progress(USGS_data, msg)
         raise  # Let the app stop as before
-  
+
+
+    # Get the actual discharge column (parameter 00060)
+    # Identify available columns
+    columns = discharge.df().columns.tolist()
+    log_progress(USGS_data, f"Raw NWIS columns: {columns}")
+
+    # Safely extract the discharge columns (parameter 00060 = streamflow)
+    discharge_cols = [col for col in columns if ':00060:' in col and 'qualifiers' not in col]
+    qualifier_cols = [col for col in columns if ':00060:' in col and 'qualifiers' in col]
+
+    # If not found, notify user and stop
+    if not discharge_cols or not qualifier_cols:
+        msg = (
+            f"No streamflow data (parameter 00060) found for site {site_no}. "
+            f"Available columns: {columns}"
+        )
+        st.error(msg)
+        log_progress(USGS_data, msg)
+        raise ValueError(msg)
+
+    # Use the first matching column
+    discharge_column = discharge_cols[0]
+    qualifier_column = qualifier_cols[0]
+    log_progress(USGS_data, f"Using discharge column: {discharge_column}")
+
 
     raw_data = pd.DataFrame({
-        'discharge_cfs': discharge.df().iloc[:, 0],
-        'qualifiers': discharge.df().iloc[:, 1]
+        'discharge_cfs': discharge.df()[discharge_column],
+        'qualifiers': discharge.df()[qualifier_column]
     })
 
     log_progress(USGS_data, f"Started data download for site {site_no}")
