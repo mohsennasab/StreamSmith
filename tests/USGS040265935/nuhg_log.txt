@@ -1,0 +1,4 @@
+[2025-03-30 11:17:56] No data available for site 040265935 between 2010-01-01 and 2023-01-01.
+[2025-03-30 11:19:31] Started data download for site 040265935
+[2025-03-30 11:19:31] Saved discharge CSV for site 040265935
+[2025-03-30 11:19:31] Saved site info CSV for site 040265935

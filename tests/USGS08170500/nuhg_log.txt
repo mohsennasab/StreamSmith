@@ -1,0 +1,3 @@
+[2025-03-30 11:35:06] Started data download for site 08170500
+[2025-03-30 11:35:08] Saved discharge CSV for site 08170500
+[2025-03-30 11:35:08] Saved site info CSV for site 08170500
