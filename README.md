@@ -1,74 +1,74 @@
-# Normalized Hydrograph Generator (NUHG)
 
-This interactive Streamlit app allows hydrologists and water resources engineers to generate **normalized unit hydrographs** from USGS streamflow data using peak detection, Gaussian smoothing, and interpolation techniques.
+# Normalized Unit Hydrograph Generator
 
-Developed by [Mohsen Tahmasebi, PhD](https://www.hydromohsen.com/)
+![App Screenshot](./app_screenshot.png)
+
+## Overview
+
+The **Normalized Unit Hydrograph Generator** is a user-friendly Streamlit-based application that enables hydrologists and water resource engineers to:
+
+- Download USGS streamflow data
+- Detect and filter peak flow events
+- Analyze storm hydrographs
+- Smooth hydrographs using Gaussian filters
+- Generate and plot Dimensionless Unit Hydrographs (DUHs)
+
+Developed by [Mohsen Tahmasebi Nasab, PhD](https://www.hydromohsen.com/), this tool supports peak-based hydrograph normalization workflows for any USGS streamflow site.
 
 ---
 
-## 🚀 Features
+## Features
 
-- Download daily or sub-daily USGS streamflow data
-- Filter and visualize peaks for selected months
-- Generate storm hydrographs and perform Gaussian smoothing
-- Create and save **Dimensionless Unit Hydrographs (DUH)**
-- Interpolate and aggregate DUHs across events
+- 📥 **Automated Data Download**: Pulls historical streamflow records from USGS NWIS.
+- 🏔️ **Peak Detection**: Uses prominence and time threshold filters to extract significant peak flows.
+- 📊 **Hydrograph Analysis**: Allows manual review and adjustment of detected events.
+- 🧪 **Gaussian Smoothing**: Cleans noisy hydrographs to better represent rainfall-runoff behavior.
+- 📈 **DUH Generation**: Produces normalized, dimensionless unit hydrographs from smoothed data.
 
 ---
 
-## 📦 Project Structure
+## How to Run
 
+1. Clone the repo or download the code.
+2. Set up your Python environment (Python ≥ 3.8 recommended).
+3. Install dependencies:
+
+```bash
+pip install -r requirements.txt
 ```
-NUHG/
-├── app/                            # Modularized backend logic
-│   ├── data_io.py
-│   ├── helpers.py
-│   ├── plotting.py
-│   ├── peak_detection.py
-│   ├── smoothing.py
-│   └── __init__.py
-├── NormalizedHydrographGenerator.py  # Streamlit GUI app
-├── launch_gui.py                     # Script to launch the app
-├── pixi.toml / pixi.lock             # Pixi environment files
-├── .gitignore / .gitattributes
+
+4. Launch the app:
+
+```bash
+streamlit run NormalizedHydrographGenerator.py
 ```
 
 ---
 
-## 🧪 How to Run
+## Folder Structure
 
-1. Make sure you have [Pixi](https://prefix.dev/docs/pixi/overview) installed and your environment set up.
-
-2. Add required packages using:
-
-   ```bash
-   pixi add streamlit pandas hydrofunctions scipy matplotlib plotly numpy
-   ```
-
-3. Run the app:
-
-   ```bash
-   python launch_gui.py
-   ```
-
-> The app will open at [http://localhost:8502](http://localhost:8502)
+- `app/`
+  - `data_io.py` – USGS data download and preprocessing
+  - `helpers.py` – utility functions like folder creation and logging
+  - `peak_detection.py` – peak identification and filtering logic
+  - `plotting.py` – Matplotlib and Plotly-based visualizations
+  - `smoothing.py` – hydrograph smoothing and DUH calculation
+- `launch_gui.py` – optional launcher script
+- `NormalizedHydrographGenerator.py` – main Streamlit interface
 
 ---
 
-## 💡 Notes
+## Output Files
 
-- This tool generates **normalized hydrographs**, not true unit hydrographs (since rainfall excess data is not included).
-- Gaussian smoothing and peak detection settings are fully adjustable in the interface.
-
----
-
-## 📬 Contact
-
-Questions, ideas, or suggestions?  
-Reach out at [mohsennasab.com](https://www.hydromohsen.com/) or submit an issue on GitHub.
+- `USGS_Discharge_<site>.csv` – raw downloaded streamflow data
+- `Peaks_<site>_All_Years.csv` – detected peak flow events
+- `Event_<n>_<year>.csv` – extracted hydrographs around selected peaks
+- `S_Event_<n>.csv` – smoothed hydrograph
+- `DUH_Event_<n>.csv` – dimensionless unit hydrograph
+- `overall_duh.csv` – combined DUH from all events
 
 ---
 
-## 📝 License
+## License
 
-MIT License (or specify your preferred license here)
+© 2024 Mohsen Tahmasebi Nasab. All rights reserved.

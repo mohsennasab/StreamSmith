@@ -132,7 +132,13 @@ def update_peaks_data(peaks_file, indices_to_keep):
         updated_df.to_csv(peaks_file, index=False)
         st.success("Peaks data updated successfully. Check the updated file.")
         st.write("Updated file saved to:", peaks_file)
+
+        # Log the number of peaks kept
+        log_progress(os.path.dirname(peaks_file), f"Updated peaks file with {len(updated_df)} peaks based on user input.")
+
     except ValueError as e:
         st.error(f"Invalid input for indices. Please enter comma-separated integers: {e}")
     except Exception as e:
         st.error(f"An error occurred while updating the file: {e}")
+
+

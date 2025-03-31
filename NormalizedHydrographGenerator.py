@@ -1,9 +1,11 @@
 import streamlit as st
 import pandas as pd
 import os
+import numpy as np
+
 
 from app.data_io import GetFlow, read_data
-from app.helpers import CreateFolder
+from app.helpers import CreateFolder, log_progress
 from app.plotting import plot_hydrograph
 from app.peak_detection import DetectAndSavePeaks, update_peaks_data
 from app.smoothing import (
@@ -61,14 +63,19 @@ def process_peaks(peaks_df, discharge_data):
 
             if st.button("Save this hydrograph", key=f'save_{event_no}'):
                 year = storm_hydrograph.index[0].year if not pd.isnull(storm_hydrograph.index[0]) else "unknown_year"
-                storm_hydrograph.to_csv(f"Event_{event_no}_{year}.csv")
-                st.success(f"Event {event_no} saved.")
+                save_dir = st.session_state.USGS_data  
+                save_path = os.path.join(save_dir, f"Event_{event_no}_{year}.csv")
+                log_progress(st.session_state.USGS_data, f"Saved Event {event_no} hydrograph to Event_{event_no}_{year}.csv")
+                storm_hydrograph.to_csv(save_path)
+                st.success(f"Event {event_no} saved to {save_path}.")
+
+
 
 # Streamlit app main function
 def main():
     st.title("Normalized Unit Hydrograph Generator")
     st.write("""
-        Developed by Mohsen Tahmasebi, PhD – https://www.hydromohsen.com/
+        Developed by Mohsen Tahmasebi Nasab, PhD – https://www.hydromohsen.com/
     """)
     st.write("""
         Please note that this application helps you create normalized hydrographs.
@@ -121,13 +128,11 @@ def main():
         """)
 
 
-        peaks_df = None  # Step 1: Initialize first
-
         if st.button("Detect and Save Peaks"):
             if st.session_state.get('data_loaded', False):
                 try:
-                    # Step 2: Run peak detection
-                    peaks_df = DetectAndSavePeaks(
+                    # Run peak detection
+                    st.session_state.peaks_df = DetectAndSavePeaks(
                         st.session_state.discharge_filtered,
                         prominence_value,
                         st.session_state.USGS_data,
@@ -138,22 +143,27 @@ def main():
                     st.error(f"An error occurred during peak detection: {e}")
                     log_progress(st.session_state.USGS_data, f"Error during peak detection: {e}")
 
-            # Step 3: Check only if peaks_df is defined
-            if peaks_df is not None and not peaks_df.empty:
-                st.success("Peaks detected and saved successfully.")
-                
-            else:
-                st.warning("No peaks were detected for the selected site and parameters. Try lowering the prominence value.")
+        # Always try to retrieve the stored peaks_df from session state
+        peaks_df = st.session_state.get('peaks_df', None)
 
-            
-            if peaks_df is not None:
-                st.write("Peaks Data:")
-                st.dataframe(peaks_df)
+        if peaks_df is not None and not peaks_df.empty:
+            st.success("Peaks detected and saved successfully.")
+            st.write("Peaks Data:")
+            st.dataframe(peaks_df)
 
+            peaks_file_path = os.path.join(output_folder, f"USGS{site_no}", f"Peaks_{site_no}_All_Years.csv")
+
+
+            # Show input for indices only if peaks are available
             indices_to_keep = st.text_input("Enter the indices to keep (comma-separated, e.g., 500,705,2706):", key="indices_to_keep")
             if st.button("Update Peaks Data"):
                 update_peaks_data(peaks_file_path, indices_to_keep)
                 st.session_state.update_triggered = True
+
+        elif "peaks_df" in st.session_state:
+            st.warning("No peaks were detected for the selected site and parameters. Try lowering the prominence value.")
+
+
 
         discharge_file_path = os.path.join(output_folder, f"USGS{site_no}", f"USGS_Discharge_{site_no}.csv")
         if st.session_state.get('update_triggered', False) and os.path.exists(discharge_file_path):
@@ -185,6 +195,7 @@ def main():
                             event_no = selected_file.split('_')[1].split('.')[0]
                             smoothed_file = os.path.join(event_files_directory, f"S_Event_{event_no}.csv")
                             st.session_state.processed_event_data.to_csv(smoothed_file, index=False)
+                            log_progress(event_files_directory, f"Smoothed hydrograph saved as S_Event_{event_no}.csv")
                             st.success(f"Smoothed hydrograph saved as {smoothed_file}")
 
                             normalized_discharge, normalized_time = create_dimensionless_unit_hydrograph(st.session_state.processed_event_data)
@@ -192,6 +203,7 @@ def main():
                                 duh_df = pd.DataFrame({'Normalized Discharge': normalized_discharge, 'Normalized Time': normalized_time})
                                 duh_file_name = f"DUH_Event_{event_no}.csv"
                                 duh_df.to_csv(os.path.join(event_files_directory, duh_file_name), index=False)
+                                log_progress(event_files_directory, f"DUH file created: DUH_Event_{event_no}.csv")
                                 st.write(f"DUH file created: {duh_file_name}")
                         except Exception as e:
                             st.error(f"An error occurred while saving the file: {e}")
@@ -201,10 +213,22 @@ def main():
                 if os.path.exists(event_files_directory):
                     try:
                         overall_duh_df, all_interpolated_duhs = process_smoothed_files(event_files_directory)
+                        
+                        # ✅ Save the overall DUH before plotting
+                        output_path = os.path.join(event_files_directory, "overall_duh.csv")
+                        overall_duh_df.to_csv(output_path, index=False)
+                        log_progress(event_files_directory, "Saved overall normalized hydrograph to overall_duh.csv")
+
+                        # ✅ Plot the DUH
                         plot_duhs(overall_duh_df, all_interpolated_duhs, np.arange(0, 10.001, 0.001), output_folder)
+
+                        log_progress(event_files_directory, "Normalized Hydrographs processed and plotted successfully.")
                         st.success("Normalized Hydrographs processed and plotted successfully.")
+
                     except Exception as e:
                         st.error(f"An error occurred: {e}")
+                        log_progress(event_files_directory, f"Error while processing DUHs: {e}")
+
                 else:
                     st.error("Directory not found. Please check the output folder and site number.")
 
