@@ -73,16 +73,20 @@ def process_peaks(peaks_df, discharge_data):
 
 # Streamlit app main function
 def main():
-    st.title("Normalized Unit Hydrograph Generator")
+    st.title("StreamSmith: Find the highs, smooth the rest, and build the hydrograph.")
     st.write("""
         Developed by Mohsen Tahmasebi Nasab, PhD – https://www.hydromohsen.com/
     """)
     st.write("""
-        Please note that this application helps you create normalized hydrographs.
-        A normalized hydrograph is not a standard unit hydrograph, as it lacks rainfall excess information...
+        💧 This application allows you to generate normalized unit hydrographs (NUHs) 
+             Unlike traditional unit hydrographs, normalized hydrographs are based solely on 
+             streamflow data and do not incorporate rainfall excess information. Instead, 
+             they provide a standardized shape of the runoff response, ideal for visualizing 
+             and comparing storm events across time and location.
+             This application helps you create normalized unit hydrographs.
     """)
 
-    site_no = st.text_input("USGS Site Number", "05125039")
+    site_no = st.text_input("USGS Site Number (https://dashboard.waterdata.usgs.gov/app/nwd/en/)", "05125039")
     begin_date = st.date_input("Begin Date", value=pd.to_datetime("2010-01-01"))
     end_date = st.date_input("End Date", value=pd.to_datetime("2023-01-01"))
     output_folder = st.text_input("Output Folder")

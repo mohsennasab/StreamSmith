@@ -1,46 +1,61 @@
+<p align="center">
+  <img src="NUH/Images/Logo.png" alt="StreamSmith Logo" width="250"/>
+</p>
 
-# Normalized Unit Hydrograph Generator
+# StreamSmith
 
-This Streamlit app helps users create normalized unit hydrographs using USGS streamflow data. The app allows you to:
-- Download and filter data from USGS gages
-- Detect and refine streamflow peaks
-- Generate and export storm hydrographs
-- Apply Gaussian smoothing
-- Create and visualize Dimensionless Unit Hydrographs (DUHs)
+StreamSmith is a Streamlit-based web application for hydrologists, engineers, and educators to generate and analyze **Normalized Unit Hydrographs (NUH)** using USGS streamflow data.
 
-## 📦 Environment Setup (using Pixi)
+---
 
-This project uses [Pixi](https://prefix.dev/docs/pixi) for environment management and reproducibility.
+## 📋 Table of Contents
 
-### 1. Install Pixi
-If you don't have Pixi installed yet:
+- [Features](#features)
+- [Installation](#installation)
+- [Launching the App](#launching-the-app)
+- [Example Use Cases](#example-use-cases)
+- [Contributing](#contributing)
+- [License](#license)
+
+---
+
+## 🚀 Features
+
+- 📥 Download discharge data from USGS NWIS
+- 📊 Detect and filter streamflow peaks
+- 📈 Visualize hydrographs and peak flow events
+- 🧮 Create and export smoothed & normalized unit hydrographs
+- 📁 Save hydrograph events and DUHs in organized folders
+- ✨ Pixi environment support for reproducible installs
+
+---
+
+## ⚙️ Installation
+
+This app uses [Pixi](https://pixi.sh/latest/) for environment management.
+
+1. Install Pixi (if you haven’t):
+   ```bash
+   curl -sSL https://pixi.sh/install.sh | bash
+   ```
+
+2. Navigate to the NUH project folder and install dependencies:
+   ```bash
+   cd NUH
+   pixi install
+   ```
+
+---
+
+## ▶️ Launching the App
+
+After installation, run the app with:
 
 ```bash
-curl -sSL https://install.pixi.sh | bash
+pixi run streamlit run NormalizedHydrographGenerator.py
 ```
 
-### 2. Create and activate the environment
-
-```bash
-pixi install
-pixi run start
-```
-
-This will install all dependencies and launch the app.
-
-## ▶️ Running the App
-
-Once the environment is ready, run the Streamlit app:
-
-```bash
-pixi run start
-```
-
-Or manually:
-
-```bash
-streamlit run NormalizedHydrographGenerator.py
-```
+---
 
 ## 📁 Project Structure
 
@@ -59,29 +74,29 @@ NUH/
 ├── pixi.lock
 ```
 
-## 📋 Features
+## 📦 Example Use Cases
 
-- Streamlit-based user interface
-- Prominence-based peak detection with time gap filtering
-- Manual peak filtering through index selection
-- Logging of all major actions and steps
-- Gaussian smoothing and DUH creation
-- All outputs saved in a structured directory per gage
-
-## 🧪 Example Usage
-
-1. Input a USGS site number and date range.
-2. Select desired months for peak analysis.
-3. Choose a prominence value (e.g., discharge std dev).
-4. Detect and optionally filter peaks.
-5. Process, smooth, and normalize hydrographs.
-6. Download resulting DUHs and view plots.
-
-## 📄 License
-
-This project is for educational and research purposes. Contact the developer for extended use or publication.
+- Analyze seasonal flood events from historical streamflow records.
+- Generate normalized hydrographs for rainfall-runoff modeling.
+- Study regional differences in stormflow responses.
+- Support academic research and watershed planning workflows.
 
 ---
 
-**Developed by:** Mohsen Tahmasebi, PhD  
+## 🤝 Contributing
+
+Feel free to fork the repo and submit pull requests. Open an issue if you spot bugs or want to suggest features!
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+**Developed by:** Mohsen Tahmasebi Nasab, PhD  
 🌐 [hydromohsen.com](https://www.hydromohsen.com)
+
+
+---
