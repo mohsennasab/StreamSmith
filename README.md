@@ -8,17 +8,6 @@ StreamSmith is a Streamlit-based web application for hydrologists, engineers, an
 
 ---
 
-## 📋 Table of Contents
-
-- [Features](#features)
-- [Installation](#installation)
-- [Launching the App](#launching-the-app)
-- [Example Use Cases](#example-use-cases)
-- [Contributing](#contributing)
-- [License](#license)
-
----
-
 ## 🚀 Features
 
 - 📥 Download discharge data from USGS NWIS
