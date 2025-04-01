@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="NUH/Images/Logo.png" alt="StreamSmith Logo" width="250"/>
+  <img src="Images/Logo.png" alt="StreamSmith Logo" width="250"/>
 </p>
 
 # StreamSmith
