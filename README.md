@@ -60,18 +60,21 @@ pixi run streamlit run NormalizedHydrographGenerator.py
 ## 📁 Project Structure
 
 ```
-NUH/
+StreamSmith/
 ├── app/
 │   ├── data_io.py
 │   ├── helpers.py
 │   ├── peak_detection.py
 │   ├── plotting.py
 │   └── smoothing.py
+├── Images/
+│   └── Logo.png
 ├── NormalizedHydrographGenerator.py
 ├── launch_gui.py
 ├── README.md
 ├── pixi.toml
 ├── pixi.lock
+
 ```
 
 ## 📦 Example Use Cases
