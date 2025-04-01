@@ -23,14 +23,16 @@ StreamSmith is a Streamlit-based web application for hydrologists, engineers, an
 
 This app uses [Pixi](https://pixi.sh/latest/) for environment management.
 
-1. Install Pixi (if you haven’t):
+1. To install pixi you can run the following command in your terminal:
    ```bash
-   curl -sSL https://pixi.sh/install.sh | bash
+   powershell -ExecutionPolicy ByPass -c "irm -useb https://pixi.sh/install.ps1 | iex"
    ```
+The above invocation will automatically download the latest version of pixi, extract it, and move the pixi binary to LocalAppData/pixi/bin. The command will also add LocalAppData/pixi/bin to your PATH environment variable, allowing you to invoke pixi from anywhere.
+
 
 2. Navigate to the NUH project folder and install dependencies:
    ```bash
-   cd NUH
+   cd "NUH Project Folder"
    pixi install
    ```
 
@@ -65,6 +67,7 @@ StreamSmith/
 ├── pixi.lock
 
 ```
+---
 
 ## 📦 Example Use Cases
 
