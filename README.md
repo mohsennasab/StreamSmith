@@ -63,8 +63,6 @@ pixi run streamlit run NormalizedHydrographGenerator.py
 
 [![Watch the video](https://img.youtube.com/vi/7s881nEHuko/0.jpg)](https://youtu.be/7s881nEHuko?si=CViCl8uZcA11IbRe)
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/7s881nEHuko?si=efe291_wV2ky23Wm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
 ---
 
 
