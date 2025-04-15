@@ -23,7 +23,7 @@ StreamSmith is a Streamlit-based web application for hydrologists, engineers, an
 
 📺 *Watch a quick demo of StreamSmith in action:*  
 
-[![Watch the video](https://img.youtube.com/vi/j-TWeX9TdM8/0.jpg)](https://youtu.be/j-TWeX9TdM8?si=gJH0qXWXYNcTD59v)
+[![Watch the video](https://img.youtube.com/vi/j-TWeX9TdM8/0.jpg)](https://youtu.be/j-TWeX9TdM8?si=hdp8Zt371DRq3kdQ)
 
 ---
 
@@ -32,7 +32,7 @@ StreamSmith is a Streamlit-based web application for hydrologists, engineers, an
 
 This app uses [Pixi](https://pixi.sh/latest/) for environment management.
 
-1. To install pixi you can run the following command in your terminal:
+1. To install pixi you can run the following command in your Windows PowerShell terminal:
    ```bash
    powershell -ExecutionPolicy ByPass -c "irm -useb https://pixi.sh/install.ps1 | iex"
    ```
@@ -41,7 +41,7 @@ The above invocation will automatically download the latest version of pixi, ext
 
 2. Navigate to the NUH project folder and install dependencies:
    ```bash
-   cd "NUH Project Folder"
+   cd "Project Folder"
    pixi install
    ```
 
@@ -62,6 +62,8 @@ pixi run streamlit run NormalizedHydrographGenerator.py
 💡 *Need help getting started? Follow this installation tutorial:*  
 
 [![Watch the video](https://img.youtube.com/vi/7s881nEHuko/0.jpg)](https://youtu.be/7s881nEHuko?si=CViCl8uZcA11IbRe)
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/7s881nEHuko?si=efe291_wV2ky23Wm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ---
 
