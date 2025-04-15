@@ -23,6 +23,7 @@ StreamSmith is a Streamlit-based web application for hydrologists, engineers, an
 
 📺 *Watch a quick demo of StreamSmith in action:*  
 
+[![Watch the video](https://img.youtube.com/vi/j-TWeX9TdM8/0.jpg)](https://youtu.be/j-TWeX9TdM8?si=gJH0qXWXYNcTD59v)
 
 ---
 
@@ -60,6 +61,7 @@ pixi run streamlit run NormalizedHydrographGenerator.py
 
 💡 *Need help getting started? Follow this installation tutorial:*  
 
+[![Watch the video](https://img.youtube.com/vi/7s881nEHuko/0.jpg)](https://youtu.be/7s881nEHuko?si=CViCl8uZcA11IbRe)
 
 ---
 
