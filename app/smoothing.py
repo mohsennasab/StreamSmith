@@ -116,13 +116,6 @@ def plot_duhs(overall_duh_df, all_interpolated_duhs, common_time_axis, output_fo
             line=dict(color='red', width=2)
         ))
 
-        # output_path = os.path.join(output_folder, f"USGS{site_no}", "overall_duh.csv")
-        # try:
-        #     overall_duh_df.to_csv(output_path, index=False)
-        #     st.success(f"Overall DUH data saved successfully to {output_path}")
-        # except Exception as e:
-        #     st.error(f"An error occurred while saving the file: {e}")
-
     fig.update_layout(
         title='Overall and Event Dimensionless Unit Hydrographs',
         xaxis_title='Normalized Time',

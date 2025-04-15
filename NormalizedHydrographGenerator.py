@@ -73,29 +73,33 @@ def process_peaks(peaks_df, discharge_data):
 
 # Streamlit app main function
 def main():
+    st.set_page_config(
+        page_title="StreamSmith",
+        page_icon="Images/Logo.png",
+        layout="wide"
+    )
+    
     st.title("StreamSmith: Find the highs, smooth the rest, and build the hydrograph.")
     # Create sidebar with instructions
     with st.sidebar:
+        st.image("Images/Logo.png", width=200)  # Logo at the top of sidebar
+
         st.header("Instructions")
         st.markdown("""
         ### Step 1: Download
         - Enter USGS site number
         - Select date range and output folder
         - Choose months or use "All"
-
         ### Step 2: Detect Peaks
         - Adjust prominence and minimum time between peaks
         - Click 'Detect and Save Peaks'
         - Review and filter peaks you want to keep
-
         ### Step 3: Process Events
         - For each event, set time windows before/after the peak
         - Save each hydrograph
-
         ### Step 4: Smoothing and DUH
         - Apply smoothing
         - Save results and generate Dimensionless Unit Hydrographs
-
         ### Final Step
         - Convert all saved hydrographs to a single normalized hydrograph
         """)
@@ -106,9 +110,8 @@ def main():
         💧 This application allows you to generate normalized unit hydrographs (NUHs) 
              Unlike traditional unit hydrographs, normalized hydrographs are based solely on 
              streamflow data and do not incorporate rainfall excess information. Instead, 
-             they provide a standardized shape of the runoff response, ideal for visualizing 
+             they provide a standardized shape of hydrograph based on peaks you choose, ideal for visualizing 
              and comparing storm events across time and location.
-             This application helps you create normalized unit hydrographs.
     """)
 
     site_no = st.text_input("USGS Site Number (https://dashboard.waterdata.usgs.gov/app/nwd/en/)", "05125039")

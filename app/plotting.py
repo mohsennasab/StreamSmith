@@ -59,13 +59,11 @@ def plot_hydrograph(storm_hydrograph):
     st.plotly_chart(fig)
 
 
-
-
 def plot_discharge_hydrograph_with_filtered_peaks(discharge_df, filtered_peaks, site_no, folder):
     discharge_df = discharge_df.copy()
     filtered_peaks = filtered_peaks.copy()
 
-    # 🛡️ Check for empty or missing columns
+    # Check for empty or missing columns
     if filtered_peaks.empty or 'Peak_Date' not in filtered_peaks.columns:
         return
 
