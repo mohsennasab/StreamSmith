@@ -1,0 +1,31 @@
+[2025-04-03 08:20:31] Raw NWIS columns: ['USGS:05125039:00060:00000', 'USGS:05125039:00060:00000_qualifiers', 'USGS:05125039:00065:00000', 'USGS:05125039:00065:00000_qualifiers']
+[2025-04-03 08:20:31] Raw NWIS columns: ['USGS:05125039:00060:00000', 'USGS:05125039:00060:00000_qualifiers', 'USGS:05125039:00065:00000', 'USGS:05125039:00065:00000_qualifiers']
+[2025-04-03 08:20:31] Using discharge column: USGS:05125039:00060:00000
+[2025-04-03 08:20:31] Started data download for site 05125039
+[2025-04-03 08:20:32] Saved discharge CSV for site 05125039
+[2025-04-03 08:20:32] Saved site info CSV for site 05125039
+[2025-04-03 08:20:32] Discharge data summary:
+count    72290.000000
+mean         9.499980
+std         15.021432
+min          0.170000
+25%          0.780000
+50%          2.820000
+75%         12.300000
+max         95.900000
+Name: discharge_cfs, dtype: float64
+[2025-04-03 08:21:04] Starting peak detection for site 05125039 with prominence value 15.021432107414864
+[2025-04-03 08:21:04] Discharge stats — min: 0.17, max: 95.9, mean: 9.499980218564117
+[2025-04-03 08:21:04] Initial peak detection found 41 peaks for site 05125039
+[2025-04-03 08:21:04] Saved final filtered peaks CSV to C:\OneDrive\OneDrive - AECOM\Automation Projects\NUH\tests\USGS05125039\Peaks_05125039_All_Years.csv
+[2025-04-03 08:21:05] Filtered 31 similar/nearby peaks using min time gap of 12 hours and 1% discharge threshold
+[2025-04-03 08:21:05] Saved final filtered peaks CSV to C:\OneDrive\OneDrive - AECOM\Automation Projects\NUH\tests\USGS05125039\Peaks_05125039_All_Years.csv
+[2025-04-03 08:21:40] Updated peaks file with 2 peaks based on user input.
+[2025-04-03 08:21:57] Saved Event 1 hydrograph to Event_1_2015.csv
+[2025-04-03 08:22:09] Saved Event 2 hydrograph to Event_2_2015.csv
+[2025-04-03 08:22:28] Smoothed hydrograph saved as S_Event_1.csv
+[2025-04-03 08:22:28] DUH file created: DUH_Event_1.csv
+[2025-04-03 08:22:35] Smoothed hydrograph saved as S_Event_2.csv
+[2025-04-03 08:22:35] DUH file created: DUH_Event_2.csv
+[2025-04-03 08:22:41] Saved overall normalized hydrograph to overall_duh.csv
+[2025-04-03 08:22:41] Normalized Hydrographs processed and plotted successfully.

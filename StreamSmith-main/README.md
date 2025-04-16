@@ -52,7 +52,7 @@ The above invocation will automatically download the latest version of pixi, ext
 After installation, run the app with:
 
 ```bash
-pixi run streamlit run NormalizedHydrographGenerator.py --server.port 8502
+pixi run streamlit run NormalizedHydrographGenerator.py
 ```
 
 ---
