@@ -41,7 +41,7 @@ The above invocation will automatically download the latest version of pixi, ext
 
 2. Navigate to the NUH project folder and install dependencies:
    ```bash
-      cd "Project Folder"
+   cd "C:\...\Project Folder (StreamSmith-main)"
    ```
 
    ```bash
