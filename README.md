@@ -105,14 +105,28 @@ Feel free to fork the repo and submit pull requests. Open an issue if you spot b
 
 ---
 
-## 📄 License
-
-This project is licensed under the MIT License.
-
----
-
 **Developed by:** Mohsen Tahmasebi Nasab, PhD  
 🌐 [hydromohsen.com](https://www.hydromohsen.com)
 
 
 ---
+
+## 📄 License
+
+Custom Open-Source License
+
+Copyright (c) 2024 Mohsen Tahmasebi Nasab
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the “Software”), to use, copy, and modify the Software for personal, academic, or internal non-commercial purposes, subject to the following conditions:
+
+1. Commercial use, including but not limited to use in paid services, proprietary software, or as part of any commercial product or package, is not permitted without prior written permission from the copyright holder.
+
+2. Redistribution of the Software, in part or in full, whether modified or unmodified, is also not permitted without prior written permission.
+
+3. This copyright notice and license shall be included in all copies or substantial portions of the Software.
+
+## Disclaimer
+The software is provided "as is", without warranty of any kind, express or implied, including but not limited to the warranties of merchantability, fitness for a particular purpose, and non-infringement. In no event shall the author or copyright holder be liable for any claim, damages, or other liability, whether in an action of contract, tort, or otherwise, arising from, out of, or in connection with the software or the use or other dealings in the software, including but not limited to any direct, indirect, incidental, special, exemplary, or consequential damages.
+
+---
+
