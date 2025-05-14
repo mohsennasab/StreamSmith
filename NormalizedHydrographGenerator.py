@@ -115,8 +115,8 @@ def main():
     """)
 
     site_no = st.text_input("USGS Site Number (https://dashboard.waterdata.usgs.gov/app/nwd/en/)", "05125039")
-    begin_date = st.date_input("Begin Date", value=pd.to_datetime("2010-01-01"))
-    end_date = st.date_input("End Date", value=pd.to_datetime("2023-01-01"))
+    begin_date = st.date_input("Begin Date (YYYY/MM/DD)", value=pd.to_datetime("2010-01-01"))
+    end_date = st.date_input("End Date (YYYY/MM/DD)", value=pd.to_datetime("2023-01-01"))
     output_folder = st.text_input("Output Folder")
 
     month_options = ["All"] + list(range(1, 13))
@@ -140,7 +140,7 @@ def main():
     if st.session_state.get('data_loaded', False):
         std_dev_suggestion = st.session_state.discharge_filtered['discharge_cfs'].std()
 
-        prominence_value = st.number_input("Enter Prominence Value", value=std_dev_suggestion)
+        prominence_value = st.number_input("Prominence Value", value=std_dev_suggestion)
 
         st.caption("""
         **ℹ️ What is prominence?**  
@@ -180,14 +180,14 @@ def main():
 
         if peaks_df is not None and not peaks_df.empty:
             st.success("Peaks detected and saved successfully.")
-            st.write("Peaks Data:")
+            st.write("Detected Peak Flows:")
             st.dataframe(peaks_df)
 
             peaks_file_path = os.path.join(output_folder, f"USGS{site_no}", f"Peaks_{site_no}_All_Years.csv")
 
 
             # Show input for indices only if peaks are available
-            indices_to_keep = st.text_input("Enter the indices to keep (comma-separated, e.g., 500,705,2706):", key="indices_to_keep")
+            indices_to_keep = st.text_input("Enter the indices to keep (comma-separated, e.g., 500, 705, 2706):", key="indices_to_keep")
             if st.button("Update Peaks Data"):
                 update_peaks_data(peaks_file_path, indices_to_keep)
                 st.session_state.update_triggered = True

@@ -57,6 +57,11 @@ def GetFlow(site_no, begin_date, end_date, output_folder, user_months):
         'qualifiers': discharge.df()[qualifier_column]
     })
 
+
+    # Filter out rows with "hf.upsampled" or "hf.missing" qualifiers (Added 05/13/2025)
+    raw_data = raw_data[~raw_data['qualifiers'].isin(['hf.upsampled', 'hf.missing'])]
+
+
     log_progress(USGS_data, f"Started data download for site {site_no}")
 
     site_info = hf.site_file(site_no)
