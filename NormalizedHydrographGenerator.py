@@ -115,6 +115,16 @@ def main():
     """)
 
     site_no = st.text_input("USGS Site Number (https://dashboard.waterdata.usgs.gov/app/nwd/en/)", "05125039")
+    
+    # Show dynamic text when site number is entered
+    if site_no:
+        st.markdown(f"""
+        <div style="padding: 1rem; background-color: #005c66; border-left: 5px solid #000000; border-radius: 5px; margin: 1rem 0;">
+            <strong>💡 Data Range Helper:</strong><br>
+            Visit <a href="https://waterdata.usgs.gov/monitoring-location/{site_no}/#dataTypeId=continuous-00060-0&period=P7D" target="_blank">this USGS page</a> and look under 'Continuous data' to find the available date range.
+        </div>
+        """, unsafe_allow_html=True)
+    
     begin_date = st.date_input("Begin Date (YYYY/MM/DD)", value=pd.to_datetime("2010-01-01"))
     end_date = st.date_input("End Date (YYYY/MM/DD)", value=pd.to_datetime("2023-01-01"))
     output_folder = st.text_input("Output Folder")
